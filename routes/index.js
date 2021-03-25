@@ -47,7 +47,7 @@ router.post('/upload', async function (req, res, next) {
   const resultCopy = await req.files.avatar.mv(imagePath);
   if(!resultCopy) {
     const resultCloudinary = await cloudinary.uploader.upload(imagePath);
-    fs.unlinkSync(imagePath);
+      fs.unlinkSync(imagePath);
     res.json({result: true, message: 'File uploaded!', url: resultCloudinary.url } );      
   } else {
     res.json({result: false, message: resultCopy} ); } 
@@ -93,7 +93,6 @@ router.post('/users/:token', async (req, res) => {
 
 // Step 2 : POST to update profile // In progress....
 router.post('/users/update/:token', async (req, res) => {
-  console.log("req.body update",req.body)
   if (!req.body.name || !req.body.currentPassword || !req.body.password) {
     res.json({
       result: false,
